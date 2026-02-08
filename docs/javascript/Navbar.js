@@ -1,5 +1,47 @@
 const navbar = document.getElementById("navbar");
 
+const ensureNavStyles = () => {
+  if (document.getElementById("dnmNavStyles")) return;
+  const style = document.createElement("style");
+  style.id = "dnmNavStyles";
+  style.textContent = `
+    #siteNav.is-solid{
+      background:rgba(255,255,255,.92);
+      border-bottom:1px solid rgba(15,23,42,.10);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+    #siteNav.is-solid .nav-link{color:rgba(15,23,42,.78)}
+    #siteNav.is-solid .nav-link:hover{color:rgba(15,23,42,1)}
+    #siteNav.is-solid .nav-title{color:rgba(15,23,42,1)}
+    #siteNav.is-solid .nav-subtitle{color:rgba(15,23,42,.62)}
+    #siteNav.is-solid .nav-chevron{color:rgba(15,23,42,.55)}
+    #siteNav.is-solid .nav-btn{
+      color:rgba(15,23,42,1);
+      border-color:rgba(15,23,42,.12);
+      background:rgba(15,23,42,.04);
+    }
+    #siteNav.is-solid .nav-btn:hover{background:rgba(15,23,42,.07)}
+
+    #mobilePanel{
+      transform:translateX(100%);
+      opacity:0;
+      pointer-events:none;
+      transition:transform .3s ease,opacity .3s ease;
+      will-change:transform;
+      overscroll-behavior:contain;
+    }
+    #mobilePanel.is-open{
+      transform:translateX(0);
+      opacity:1;
+      pointer-events:auto;
+    }
+  `;
+  document.head.appendChild(style);
+};
+
+ensureNavStyles();
+
 navbar.innerHTML = `
 <nav id="siteNav" class="fixed inset-x-0 top-0 z-50 bg-transparent transition-all duration-300">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -9,48 +51,48 @@ navbar.innerHTML = `
           <i class="fa-solid fa-tooth text-white text-lg"></i>
         </div>
         <div class="leading-tight">
-          <div class="text-base font-bold text-white">Dentist Near Me</div>
-          <div class="text-xs font-semibold text-white/70">Local Dentist Near You</div>
+          <div class="nav-title text-base font-bold text-white">Dentist Near Me</div>
+          <div class="nav-subtitle text-xs font-semibold text-white/70">Local Dentist Near You</div>
         </div>
       </a>
 
       <div class="hidden items-center gap-7 lg:flex">
-        <a href="index.html" class="text-sm font-semibold text-white/80 hover:text-white transition">Home</a>
-        <a href="about.html" class="text-sm font-semibold text-white/80 hover:text-white transition">About</a>
+        <a href="index.html" class="nav-link text-sm font-semibold text-white/80 hover:text-white transition">Home</a>
+        <a href="about.html" class="nav-link text-sm font-semibold text-white/80 hover:text-white transition">About</a>
 
         <div class="relative group">
-          <button type="button" class="flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white transition">
+          <button type="button" class="nav-link flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white transition">
             Services
-            <i class="fa-solid fa-chevron-down text-xs text-white/60 group-hover:text-white"></i>
+            <i class="nav-chevron fa-solid fa-chevron-down text-xs text-white/60 group-hover:text-white"></i>
           </button>
 
           <div class="absolute left-0 top-full h-4 w-44"></div>
 
           <div class="absolute left-0 top-full w-[320px] pt-4 opacity-0 translate-y-1 pointer-events-none transition duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
-            <div class="rounded-2xl border border-white/10 bg-slate-950/90 p-3 shadow-sm backdrop-blur">
-              <a href="professional-teeth-cleaning.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-white transition">
+            <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+              <a href="professional-teeth-cleaning.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
                 <i class="fa-solid fa-tooth text-[#00A6D2]"></i> Professional Teeth Cleaning
               </a>
-              <a href="dental-fillings.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-white transition">
+              <a href="dental-fillings.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
                 <i class="fa-solid fa-teeth text-[#00A6D2]"></i> Dental Fillings
               </a>
-              <a href="tooth-extractions.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-white transition">
+              <a href="tooth-extractions.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
                 <i class="fa-solid fa-kit-medical text-[#00A6D2]"></i> Tooth Extractions
               </a>
-              <a href="teeth-whitening.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-white transition">
-                <i class="fa-solid fa-teeth text-[#00A6D2]"></i> Teeth Whitening
+              <a href="teeth-whitening.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
+                <i class="fa-solid fa-sparkles text-[#00A6D2]"></i> Teeth Whitening
               </a>
-              <a href="dental-sealants.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-white transition">
+              <a href="dental-sealants.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
                 <i class="fa-solid fa-shield text-[#00A6D2]"></i> Dental Sealants
               </a>
-              <a href="braces-invisalign.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-white transition">
+              <a href="braces-invisalign.html" class="flex items-center gap-3 rounded-2xl px-3 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition">
                 <i class="fa-solid fa-bars-staggered text-[#00A6D2]"></i> Braces / Invisalign
               </a>
             </div>
           </div>
         </div>
 
-        <a href="contact.html" class="text-sm font-semibold text-white/80 hover:text-white transition">Contact</a>
+        <a href="contact.html" class="nav-link text-sm font-semibold text-white/80 hover:text-white transition">Contact</a>
 
         <a href="contact.html" class="inline-flex items-center gap-2 rounded-2xl bg-[#00A6D2] px-4 py-3 text-sm font-bold text-white shadow-sm hover:brightness-95 transition">
           <i class="fa-solid fa-calendar-check"></i>
@@ -58,14 +100,14 @@ navbar.innerHTML = `
         </a>
       </div>
 
-      <button id="navBtn" class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 text-white hover:bg-white/10 transition lg:hidden" aria-label="Toggle menu" aria-controls="mobilePanel" aria-expanded="false">
+      <button id="navBtn" class="nav-btn inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 text-white hover:bg-white/10 transition lg:hidden" aria-label="Toggle menu" aria-controls="mobilePanel" aria-expanded="false">
         <i id="navIcon" class="fa-solid fa-bars text-lg"></i>
       </button>
     </div>
   </div>
 </nav>
 
-<div id="mobilePanel" class="fixed inset-0 z-40 bg-slate-950 lg:hidden">
+<div id="mobilePanel" class="fixed inset-0 z-[60] bg-white lg:hidden">
   <div class="mx-auto h-full max-w-7xl px-4 sm:px-6">
     <div class="flex h-20 items-center justify-between">
       <a href="index.html" class="flex items-center gap-3">
@@ -73,68 +115,68 @@ navbar.innerHTML = `
           <i class="fa-solid fa-tooth text-white text-lg"></i>
         </div>
         <div class="leading-tight">
-          <div class="text-base font-bold text-white">Dentist Near Me</div>
-          <div class="text-xs font-semibold text-white/70">Local Dentist Near You</div>
+          <div class="text-base font-bold text-slate-900">Dentist Near Me</div>
+          <div class="text-xs font-semibold text-slate-600">Local Dentist Near You</div>
         </div>
       </a>
 
-      <button id="closeBtn" class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 text-white hover:bg-white/10 transition" aria-label="Close menu">
+      <button id="closeBtn" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-3 text-slate-900 hover:bg-slate-100 transition" aria-label="Close menu">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
     </div>
 
     <div class="h-[calc(100vh-80px)] overflow-y-auto pb-10 pt-6">
       <div class="grid gap-2">
-        <a href="index.html" class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">Home</a>
-        <a href="about.html" class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">About</a>
+        <a href="index.html" class="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition">Home</a>
+        <a href="about.html" class="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition">About</a>
 
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-2">
-          <div class="px-4 py-3 text-xs font-bold text-white/70">Services</div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-2">
+          <div class="px-4 py-3 text-xs font-bold text-slate-600">Services</div>
 
-          <a href="professional-teeth-cleaning.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/15">
+          <a href="professional-teeth-cleaning.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-900 hover:bg-white transition">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/12">
               <i class="fa-solid fa-tooth text-[#00A6D2]"></i>
             </div>
             <span>Professional Teeth Cleaning</span>
           </a>
 
-          <a href="dental-fillings.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/15">
+          <a href="dental-fillings.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-900 hover:bg-white transition">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/12">
               <i class="fa-solid fa-teeth text-[#00A6D2]"></i>
             </div>
             <span>Dental Fillings</span>
           </a>
 
-          <a href="tooth-extractions.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/15">
+          <a href="tooth-extractions.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-900 hover:bg-white transition">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/12">
               <i class="fa-solid fa-kit-medical text-[#00A6D2]"></i>
             </div>
             <span>Tooth Extractions</span>
           </a>
 
-          <a href="teeth-whitening.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/15">
-              <i class="fa-solid fa-teeth text-[#00A6D2]"></i>
+          <a href="teeth-whitening.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-900 hover:bg-white transition">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/12">
+              <i class="fa-solid fa-sparkles text-[#00A6D2]"></i>
             </div>
             <span>Teeth Whitening</span>
           </a>
 
-          <a href="dental-sealants.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/15">
+          <a href="dental-sealants.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-900 hover:bg-white transition">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/12">
               <i class="fa-solid fa-shield text-[#00A6D2]"></i>
             </div>
             <span>Dental Sealants</span>
           </a>
 
-          <a href="braces-invisalign.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/15">
+          <a href="braces-invisalign.html" class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-900 hover:bg-white transition">
+            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#00A6D2]/12">
               <i class="fa-solid fa-bars-staggered text-[#00A6D2]"></i>
             </div>
             <span>Braces / Invisalign</span>
           </a>
         </div>
 
-        <a href="contact.html" class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold text-white/90 hover:bg-white/10 hover:text-white transition">Contact</a>
+        <a href="contact.html" class="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-semibold text-slate-900 hover:bg-slate-100 transition">Contact</a>
 
         <a href="contact.html" class="mt-2 inline-flex items-center justify-center gap-2 rounded-2xl bg-[#00A6D2] px-6 py-4 text-sm font-bold text-white shadow-sm hover:brightness-95 transition">
           <i class="fa-solid fa-calendar-check"></i>
@@ -145,20 +187,6 @@ navbar.innerHTML = `
   </div>
 </div>
 `;
-
-const ensureNavStyles = () => {
-  if (document.getElementById("dnmNavStyles")) return;
-  const style = document.createElement("style");
-  style.id = "dnmNavStyles";
-  style.textContent = `
-    #siteNav.is-solid{background:rgba(2,6,23,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.10)}
-    #mobilePanel{transform:translateX(100%);opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease;will-change:transform;overscroll-behavior:contain}
-    #mobilePanel.is-open{transform:translateX(0);opacity:1;pointer-events:auto}
-  `;
-  document.head.appendChild(style);
-};
-
-ensureNavStyles();
 
 const nav = document.getElementById("siteNav");
 const btn = document.getElementById("navBtn");
